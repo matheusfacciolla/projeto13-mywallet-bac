@@ -11,4 +11,9 @@ const signInSchema = Joi.object({
     password: Joi.string().required(),
 });
 
-export { signUpSchema, signInSchema };
+const transactionSchema = Joi.object({
+    value: Joi.number().pattern(/^[1-9][0-9]*\,[0-9]{2}$/).required(),
+    description: Joi.string().required(),
+})
+
+export { signUpSchema, signInSchema, transactionSchema };

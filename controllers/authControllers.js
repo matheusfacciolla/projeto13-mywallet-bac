@@ -19,6 +19,8 @@ async function signUp(req, res) {
 }
 
 async function signIn(req, res) {
+    const { email } = req.body;
+
     try {
         const token = v4();
         const user = await db.collection("users").findOne({ email: email });

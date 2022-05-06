@@ -9,16 +9,9 @@ async function validSignUp(req, res, next) {
         return res.status(422).send(validation.error.details.map((error) => error.message));
     }
 
-    try {
-        const isEmailExist = await db.collection("users").findOne({ email: email });
-        if (isEmailExist) {
-            res.sendStatus(409);
-            return;
-        }
-
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
+    const isEmailExist = await db.collection("users").findOne({ email: email });
+    if (isEmailExist) {
+        res.sendStatus(409);
         return;
     }
 
@@ -34,23 +27,16 @@ async function validSignIn(req, res, next) {
         return;
     }
 
-    try {
-        const isUserExist = await db.collection("users").findOne({ email: email });
-        const isCorrectPassword = bcrypt.compareSync(password, isUserExist.password);
+    const isUserExist = await db.collection("users").findOne({ email: email });
+    const isCorrectPassword = bcrypt.compareSync(password, isUserExist.password);
 
-        if (!isUserExist) {
-            res.sendStatus(404);
-            return;
-        }
+    if (!isUserExist) {
+        res.sendStatus(404);
+        return;
+    }
 
-        if (!isCorrectPassword) {
-            res.sendStatus(401);
-            return;
-        }
-
-    } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
+    if (!isCorrectPassword) {
+        res.sendStatus(401);
         return;
     }
 
