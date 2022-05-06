@@ -12,7 +12,7 @@ const signInSchema = Joi.object({
 });
 
 const transactionSchema = Joi.object({
-    value: Joi.number().pattern(/^[1-9][0-9]*\,[0-9]{2}$/).required(),
+    value: Joi.string().pattern(/^[1-9][0-9]*\,[0-9]{2}$/).required(),
     description: Joi.string().required(),
 })
 

@@ -1,4 +1,4 @@
-import transactionSchema from "../schemas.js";
+import { transactionSchema } from "../schemas.js";
 
 async function validToken(req, res, next) {
     const { authorization } = req.headers;

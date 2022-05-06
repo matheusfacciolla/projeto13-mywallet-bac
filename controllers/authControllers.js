@@ -1,5 +1,5 @@
-import { v4 } from "uudi";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
+import { v4 } from 'uuid';
 
 import db from "../db.js";
 

@@ -1,13 +1,13 @@
 import express, { json } from "express";
-import { ObjectId } from "mongodb";
 import dotenv from "dotenv";
 import chalk from "chalk";
 import cors from "cors";
 
-import authRouter from "./routes/authRouter";
-import transactionRouter from "./routes/transactionsRouter";
+import authRouter from "./routes/authRouter.js";
+import transactionRouter from "./routes/transactionsRouter.js";
 
 dotenv.config();
+const porta = process.env.PORTA;
 
 const app = express();
 app.use(cors());

@@ -1,5 +1,4 @@
-import signUpSchema from "../schemas.js";
-import signInSchema from "../schemas.js";
+import {signUpSchema, signInSchema }from "../schemas.js";
 
 async function validSignUp(req, res, next) {
     const { name, email, password } = req.body;
