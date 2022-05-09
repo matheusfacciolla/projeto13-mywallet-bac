@@ -8,7 +8,7 @@ async function signUp(req, res) {
     const passwordHash = bcrypt.hashSync(password, 10);
 
     try {
-        await db.collection("users").insertOne({ name: name, email: email, password: passwordHash });
+        await db.collection("users").insertOne({ name: name, email: email, password: passwordHash, confirmedPassword: passwordHash });
         res.sendStatus(201);
 
     } catch (error) {
@@ -19,15 +19,13 @@ async function signUp(req, res) {
 }
 
 async function signIn(req, res) {
-    const { email } = req.body;
-
     try {
         const token = v4();
-        const user = await db.collection("users").findOne({ email: email });
         console.log(`Token gerado: ${token}`);
 
-        await db.collection("sessions").insertOne({ token, userId: user._id });
-        res.sendStatus(200);
+        const { user } = res.locals;
+        const session = await db.collection("sessions").insertOne({ token, userId: user._id });
+        res.send({ token: token, name: user.name }).status(200);
 
     } catch (error) {
         console.log(error);
